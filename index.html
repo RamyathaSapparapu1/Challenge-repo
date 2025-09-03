@@ -3,429 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Application Dashboard</title>
-    <style>
-        /* CSS styles go here */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f9;
-            color: #333;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #4a657c;
-            padding-bottom: 15px;
-        }
-
-        .sidebar nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar nav ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar nav ul li a {
-            display: block;
-            padding: 15px;
-            text-decoration: none;
-            color: #ecf0f1;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .sidebar nav ul li a:hover,
-        .sidebar nav ul li a.active {
-            background-color: #34495e;
-        }
-
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
-            margin-left: 250px; /* Adjust based on sidebar width */
-        }
-
-        .header {
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .header .user-info {
-            font-size: 16px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .dashboard-sections {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .section-card {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .section-card h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        .section-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .section-card ul li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .section-card ul li:last-child {
-            border-bottom: none;
-        }
-
-        .summary-box {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .summary-item {
-            background-color: #eaf1f6;
-            padding: 20px;
-            border-radius: 8px;
-            flex: 1;
-            margin: 0 10px;
-        }
-
-        .summary-item .value {
-            font-size: 36px;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .summary-item .label {
-            font-size: 14px;
-            color: #777;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table thead {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-        }
-
-        table th, table td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        #profile-content .profile-info {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 20px;
-        }
-
-        #profile-content .profile-info h4 {
-            margin-top: 0;
-        }
-    </style>
+    <title>Bank Employee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <aside class="sidebar">
-        <h2>Student Dashboard</h2>
+    <header class="navbar">
+        <div class="logo">Bank Dashboard</div>
         <nav>
             <ul>
-                <li><a href="#" id="home-link" class="active">🏠 Dashboard</a></li>
-                <li><a href="#" id="courses-link">📚 Courses</a></li>
-                <li><a href="#" id="grades-link">📈 Grades</a></li>
-                <li><a href="#" id="schedule-link">📅 Schedule</a></li>
-                <li><a href="#" id="profile-link">👤 Profile</a></li>
-                <li><a href="#">⚙️ Settings</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#customer-accounts">Accounts</a></li>
+                <li><a href="#transactions">Transactions</a></li>
+                <li><a href="#profile">Profile</a></li>
             </ul>
         </nav>
-    </aside>
+        <div class="user-info">Welcome, Employee!</div>
+    </header>
 
-    <main class="main-content">
-        <header class="header">
-            <h1>Welcome, <span id="student-name"></span>!</h1>
-            <div class="user-info">Student ID: <span id="student-id"></span></div>
-        </header>
-
-        <section id="home-content">
-            <div class="summary-box">
-                <div class="summary-item">
-                    <div class="value" id="summary-courses"></div>
-                    <div class="label">Total Courses</div>
+    <main class="dashboard-container">
+        <section id="dashboard" class="dashboard-section">
+            <h2>Dashboard</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Total Customers</h3>
+                    <p id="total-customers">0</p>
                 </div>
-                <div class="summary-item">
-                    <div class="value" id="summary-gpa"></div>
-                    <div class="label">Current GPA</div>
+                <div class="card">
+                    <h3>Active Accounts</h3>
+                    <p id="active-accounts">0</p>
                 </div>
-                <div class="summary-item">
-                    <div class="value" id="summary-alerts"></div>
-                    <div class="label">Important Alerts</div>
-                </div>
-            </div>
-            
-            <div class="dashboard-sections">
-                <div class="section-card">
-                    <h3>Recent Grades</h3>
-                    <div id="recent-grades-list"></div>
-                </div>
-                <div class="section-card">
-                    <h3>Upcoming Assignments</h3>
-                    <div id="upcoming-assignments-list"></div>
+                <div class="card">
+                    <h3>Pending Approvals</h3>
+                    <p id="pending-approvals">0</p>
                 </div>
             </div>
         </section>
 
-        <section id="courses-content" class="hidden">
-            <h2>My Courses</h2>
-            <div id="courses-list"></div>
-        </section>
-
-        <section id="grades-content" class="hidden">
-            <h2>My Grades</h2>
-            <table>
+        <section id="customer-accounts" class="dashboard-section hidden">
+            <h2>Customer Accounts</h2>
+            <div class="search-bar">
+                <input type="text" id="account-search" placeholder="Search by account number...">
+                <button onclick="searchAccount()">Search</button>
+            </div>
+            <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Course</th>
-                        <th>Assignment</th>
-                        <th>Grade</th>
-                        <th>Weight</th>
+                        <th>Account #</th>
+                        <th>Customer Name</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="grades-table-body">
-                </tbody>
+                <tbody id="account-list">
+                    </tbody>
             </table>
         </section>
 
-        <section id="schedule-content" class="hidden">
-            <h2>My Schedule</h2>
-            <div id="schedule-list"></div>
+        <section id="transactions" class="dashboard-section hidden">
+            <h2>Recent Transactions</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Account #</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-list">
+                    </tbody>
+            </table>
         </section>
-
-        <section id="profile-content" class="hidden">
-            <h2>Student Profile</h2>
-            <div class="section-card profile-info">
-                <div>
-                    <h4>Personal Information</h4>
-                    <p><strong>Name:</strong> <span id="profile-name"></span></p>
-                    <p><strong>ID:</strong> <span id="profile-id"></span></p>
-                    <p><strong>Email:</strong> <span id="profile-email"></span></p>
-                </div>
-                <div>
-                    <h4>Academic Information</h4>
-                    <p><strong>Major:</strong> <span id="profile-major"></span></p>
-                    <p><strong>Year:</strong> <span id="profile-year"></span></p>
-                    <p><strong>Current GPA:</strong> <span id="profile-gpa"></span></p>
-                </div>
-            </div>
-        </section>
-
     </main>
-    
-    <script>
-        // JavaScript logic goes here
-        document.addEventListener('DOMContentLoaded', () => {
-            const studentData = {
-                name: 'Jane Doe',
-                id: 'S1234567',
-                email: 'jane.doe@university.edu',
-                major: 'Computer Science',
-                year: 'Junior',
-                gpa: 3.85,
-                courses: [
-                    { id: 'CS101', name: 'Intro to Programming', instructor: 'Dr. Smith' },
-                    { id: 'MATH202', name: 'Calculus II', instructor: 'Prof. Johnson' },
-                    { id: 'PHYS103', name: 'Physics for Engineers', instructor: 'Dr. Lee' }
-                ],
-                grades: [
-                    { course: 'Intro to Programming', assignment: 'Midterm', grade: '92%', weight: '40%' },
-                    { course: 'Calculus II', assignment: 'Homework 3', grade: '88%', weight: '10%' },
-                    { course: 'Physics for Engineers', assignment: 'Lab Report 1', grade: '95%', weight: '20%' }
-                ],
-                assignments: [
-                    { name: 'CS101 - Final Project', dueDate: 'Dec 15, 2025' },
-                    { name: 'MATH202 - Exam 4', dueDate: 'Dec 10, 2025' }
-                ],
-                schedule: [
-                    { day: 'Monday', time: '10:00 AM', course: 'Intro to Programming', location: 'Room 205' },
-                    { day: 'Tuesday', time: '1:00 PM', course: 'Physics for Engineers', location: 'Lab A' }
-                ],
-                alerts: 2
-            };
-
-            function updateDashboard() {
-                // Update header info
-                document.getElementById('student-name').textContent = studentData.name;
-                document.getElementById('student-id').textContent = studentData.id;
-
-                // Update summary boxes
-                document.getElementById('summary-courses').textContent = studentData.courses.length;
-                document.getElementById('summary-gpa').textContent = studentData.gpa.toFixed(2);
-                document.getElementById('summary-alerts').textContent = studentData.alerts;
-
-                // Update recent grades
-                const recentGradesList = document.getElementById('recent-grades-list');
-                recentGradesList.innerHTML = '';
-                studentData.grades.slice(0, 3).forEach(grade => {
-                    const li = document.createElement('li');
-                    li.textContent = `${grade.course}: ${grade.assignment} - ${grade.grade}`;
-                    recentGradesList.appendChild(li);
-                });
-
-                // Update upcoming assignments
-                const upcomingAssignmentsList = document.getElementById('upcoming-assignments-list');
-                upcomingAssignmentsList.innerHTML = '';
-                studentData.assignments.forEach(assignment => {
-                    const li = document.createElement('li');
-                    li.textContent = `${assignment.name} (Due: ${assignment.dueDate})`;
-                    upcomingAssignmentsList.appendChild(li);
-                });
-            }
-
-            function showSection(sectionId) {
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.add('hidden');
-                });
-                document.getElementById(sectionId).classList.remove('hidden');
-            }
-
-            function updateNavigation(activeLinkId) {
-                document.querySelectorAll('.sidebar nav ul li a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                document.getElementById(activeLinkId).classList.add('active');
-            }
-
-            // Navigation logic
-            document.getElementById('home-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection('home-content');
-                updateNavigation('home-link');
-                updateDashboard();
-            });
-
-            document.getElementById('courses-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection('courses-content');
-                updateNavigation('courses-link');
-                const coursesList = document.getElementById('courses-list');
-                coursesList.innerHTML = '';
-                studentData.courses.forEach(course => {
-                    const card = document.createElement('div');
-                    card.className = 'section-card';
-                    card.innerHTML = `<h3>${course.name}</h3><p><strong>Course ID:</strong> ${course.id}</p><p><strong>Instructor:</strong> ${course.instructor}</p>`;
-                    coursesList.appendChild(card);
-                });
-            });
-
-            document.getElementById('grades-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection('grades-content');
-                updateNavigation('grades-link');
-                const gradesTableBody = document.getElementById('grades-table-body');
-                gradesTableBody.innerHTML = '';
-                studentData.grades.forEach(grade => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${grade.course}</td>
-                        <td>${grade.assignment}</td>
-                        <td>${grade.grade}</td>
-                        <td>${grade.weight}</td>
-                    `;
-                    gradesTableBody.appendChild(tr);
-                });
-            });
-
-            document.getElementById('schedule-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection('schedule-content');
-                updateNavigation('schedule-link');
-                const scheduleList = document.getElementById('schedule-list');
-                scheduleList.innerHTML = '';
-                studentData.schedule.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'section-card';
-                    card.innerHTML = `<h3>${item.course}</h3><p><strong>Day:</strong> ${item.day}</p><p><strong>Time:</strong> ${item.time}</p><p><strong>Location:</strong> ${item.location}</p>`;
-                    scheduleList.appendChild(card);
-                });
-            });
-
-            document.getElementById('profile-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection('profile-content');
-                updateNavigation('profile-link');
-                document.getElementById('profile-name').textContent = studentData.name;
-                document.getElementById('profile-id').textContent = studentData.id;
-                document.getElementById('profile-email').textContent = studentData.email;
-                document.getElementById('profile-major').textContent = studentData.major;
-                document.getElementById('profile-year').textContent = studentData.year;
-                document.getElementById('profile-gpa').textContent = studentData.gpa.toFixed(2);
-            });
-
-            // Initialize the dashboard
-            updateDashboard();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-                                                                           </html>
+</html>
+            
